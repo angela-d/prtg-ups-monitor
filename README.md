@@ -14,6 +14,10 @@ This script was tested/built for an APC SmartUPS 1500 via USB, but should work f
 ## My Physical Setup (Yours may differ, depending on battery)
 The APC SmartUPS uses the [usbhid-ups](https://networkupstools.org/docs/man/usbhid-ups.html) driver and is accessible by plugging a USB A to B (old printer style) from the UPS, into the Pi. (USB B port is native to the battery.)
 
+**Pre-requisite**
+
+The Pi will require wifi / network jack and/or a switch accessible, so PRTG can reach it.
+
 **Worth Noting**
 
 You can have one Pi monitor multiple batteries, but in my environment its one UPS per closet, so I didn't consider such environments in the code.  Feel free to adjust to suit your needs.
