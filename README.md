@@ -3,6 +3,7 @@ This super light script will give the ability to do network monitoring on a UPS 
 
 This script was tested/built for an APC SmartUPS 1500 via USB, but should work for any UPS that's [supported by NUT](https://networkupstools.org/stable-hcl.html).  You may need to adjust the driver used, my instructions were as-used in my environment.
 
+![Screenshot](screenshot.png)
 
 ## In Summary
 - NUT monitors the battery statistics
