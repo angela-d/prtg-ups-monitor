@@ -35,7 +35,7 @@ This should be a *reserved IP* (one you don't plan to use - and is outside of an
 
 Increment it for each machine using `172.28.4.xx`; xx = *closet number*
 ```bash
-pico /etc/dhcpcd.conf
+sudo pico /etc/dhcpcd.conf
 ```
 
 Add the following (make sure the static IP you assign, doesn't already exist -- customize to suit your environment)
@@ -110,7 +110,7 @@ systemctl start snmpd
 ### Allow SNMP Remote Probes
 This is to monitor the health of the Pi, not the battery (I could not locate the MIBs needed for the APC Smart-UPS 1500)
 ```bash
-pico /etc/snmp/snmpd.conf
+sudo pico /etc/snmp/snmpd.conf
 ```
 
 Under AGENT BEHAVIOR, add (comment out any existing agentAddress entries):
@@ -121,7 +121,7 @@ agentAddress udp:161
 Under ACCESS CONTROL, add (comment out any existing rocommunity strings) - add the IP of your PRTG installation here:
 ```bash
 rocommunity public 172.28.5.1
-# any other IP you want to have access to.  Port 161 is firewalled on networked PCs, so you'd need a firewall exception to probe locally.
+# any other IP you want to have access to.
 ```
 
 Provision your changes with a restart:
@@ -174,7 +174,7 @@ This was "deprecated" in distros with systemd but you can restore rc.local-like 
 
 Create the systemd service
 ```bash
-pico /etc/systemd/system/rc-local.service
+sudo pico /etc/systemd/system/rc-local.service
 ```
 Add the following to `rc-local.service`
 ```bash
@@ -221,7 +221,6 @@ service rc-local status
 ### Create a user so PRTG can login remotely to check on Nut
 - Create an SSH key for PRTG to use on Linux-based servers (if you haven't already)
 - Go into PRTG dashboard settings and add the key and `prtg` user for Linux
-- Add PRTG's pubkey to `/home/prtg/.ssh/authorized_keys`
 - Restart the SSH daemon for the changes to take effect:
 ```bash
 service ssh restart
@@ -236,9 +235,12 @@ mkdir /var/prtg/scriptsxml
 
 - Clone the remote repo and assign the PRTG **scriptsxml** directory as the destination:
 ```bash
-git clone https://github.com/angela-d/prtg-ups-monitor.git /var/prtg/scriptsxml && chmod 750 -R $(find /var/prtg/ -type d) &&
-chmod 544 $(find /var/prtg/scriptsxml -type f) && chmod 540 -R $(find /var/prtg/scriptsxml -type f)
+git clone https://github.com/angela-d/prtg-ups-monitor.git /var/prtg/scriptsxml &&
+chmod 750 -R $(find /var/prtg/ -type d) &&
+chmod 544 $(find /var/prtg/scriptsxml -type f) &&
+chmod 540 -R $(find /var/prtg/scriptsxml -type f)
 ```
+
 In summary:
 - `battery-sensor.py` is an executable
 - `chown` to assign permissions to the PRTG user so it can read.
@@ -250,7 +252,7 @@ In summary:
 ***
 
 ## Reduce Writes to the Pi
-Since this is a Pi, you don't want the SD cart constantly being written to.
+Since this is a Pi, you don't want the SD card constantly being written to, as such will shorten its lifespan.
 
 Switch to root on the Pi:
 ```bash
@@ -259,7 +261,7 @@ sudo su
 
 Create the file:
 ```bash
-pico /etc/rsyslog.d/10-prtg.conf
+sudo pico /etc/rsyslog.d/10-prtg.conf
 ```
 
 Append to **10-prtg.conf**:
