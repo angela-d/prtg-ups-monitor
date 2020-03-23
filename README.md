@@ -1,7 +1,7 @@
 # UPS Monitoring with Raspberry Pi's & PRTG
 This super light script will give the ability to do network monitoring on a UPS backup battery that lacks networking (or requires proprietary software), via PRTG.
 
-This script was tested/built for an APC SmartUPS 1500 via USB, but should work for any UPS that's [supported by NUT](https://networkupstools.org/stable-hcl.html).  You may need to adjust the driver used, my instructions were as-used in my environment.
+This script was tested/built for an APC SmartUPS 1500 via USB and also used with Tripp Lite SMART500RT1U, but should work for any UPS that's [supported by NUT](https://networkupstools.org/stable-hcl.html).  You may need to adjust the driver used, my instructions were as-used in my environment.
 
 ![Screenshot](screenshot.png)
 
