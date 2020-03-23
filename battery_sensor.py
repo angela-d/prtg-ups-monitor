@@ -36,8 +36,12 @@ def obtain_status():
 
         if statuses[0] == 'Ups Model':
             banner_model = "Model: " + statuses[1]
+        else:
+            banner_model = ""
         if statuses[0] == 'Ups Serial':
             banner_serial = " Serial: " + statuses[1]
+        else:
+            banner_serial = ""
 
         # if there's a fluctuation in battery voltage, assume its running on battery
         # or something is worth mentioning
@@ -179,7 +183,7 @@ def units(channel):
         elif channel == 'Output Frequency':
             unit_measurement = 'Hz'
         else:
-            unit_measurement = "Channel relation not found"
+            unit_measurement = "Set unit measurement in settings of this sensor"
 
     return unit_measurement
 
